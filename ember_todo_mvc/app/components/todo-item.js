@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-	repo: Ember.inject.service(),
 	tagName: 'li',
 	editing: false,
 	classNameBindings: ['todo.completed', 'editing'],
@@ -35,11 +34,11 @@ export default Ember.Component.extend({
 		toggleCompleted(e) {
 			let todo = this.get('todo');
 			Ember.set(todo, 'completed', e.target.checked);
-			this.get('repo').persist();
+      todo.save();
 		},
 
 		removeTodo() {
-			this.get('repo').delete(this.get('todo'));
+      this.get('todo').destroyRecord();
 		}
 	},
 

@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-	repo: Ember.inject.service(),
 	tagName: 'section',
 	elementId: 'main',
 	canToggle: true,
@@ -20,8 +19,10 @@ export default Ember.Component.extend({
 
 		toggleAll() {
 			let allCompleted = this.get('allCompleted');
-			this.get('todos').forEach(todo => Ember.set(todo, 'completed', !allCompleted));
-			this.get('repo').persist();
+			this.get('todos').forEach(todo => {
+        Ember.set(todo, 'completed', !allCompleted)
+        todo.save();
+      });
 		}
 	}
 });

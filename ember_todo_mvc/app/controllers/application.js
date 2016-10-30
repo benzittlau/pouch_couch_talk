@@ -7,7 +7,8 @@ export default Ember.Controller.extend({
 	actions: {
 		createTodo(e) {
 			if (e.keyCode === 13 && !Ember.isBlank(e.target.value)) {
-				this.get('repo').add({ title: e.target.value.trim(), completed: false });
+				var todo = this.get('store').createRecord('todo', { title: e.target.value.trim(), completed: false });
+        todo.save();
 				e.target.value = '';
 			}
 		},
