@@ -14,8 +14,9 @@ export default Ember.Controller.extend({
 		},
 
 		clearCompleted() {
-			this.get('model').removeObjects(this.get('completed'));
-			this.get('repo').persist();
+			this.get('completed').forEach(todo => {
+        todo.destroyRecord();
+      });
 		}
 	}
 });
